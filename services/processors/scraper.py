@@ -29,13 +29,14 @@ def download_reels(reels_url,id):
     """
     utility function to download posts from the given reel url
     """
-    
+    print(reels_url)
     reel = Reel(reels_url)
     reel.scrape(headers=headers)
     reel.download(id + '.mp4')
     
 def download(url):
-
+    print("Url")
+    print(url)
     site = url.split('/')[2].split('.')[1]
     type = url.split('/')[3]
     id = url.split('/')[4]
@@ -58,7 +59,7 @@ def download(url):
         except:
             raise 'Could not parse the reels url'
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
 
-    url = 'https://www.instagram.com/reel/CVKobtmgTST/?utm_medium=copy_link'
-    download(url)
+#     url = 'https://www.instagram.com/reel/CVKobtmgTST/?utm_medium=copy_link'
+#     download(url)
