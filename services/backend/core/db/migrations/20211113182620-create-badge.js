@@ -1,26 +1,20 @@
 "use strict";
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable("annotationFormFields", {
+    await queryInterface.createTable("badges", {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      type: {
-        type: Sequelize.ENUM("text", "date", "radio", "range"),
-      },
-      label: {
-        type: Sequelize.STRING,
-      },
-      key: {
-        type: Sequelize.STRING,
-      },
-      order: {
-        type: Sequelize.INTEGER,
-      },
-      annotationForm: {
+      owner: {
         type: Sequelize.UUID,
+      },
+      name: {
+        type: Sequelize.STRING,
+      },
+      description: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -33,6 +27,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("annotationFormFields");
+    await queryInterface.dropTable("badges");
   },
 };

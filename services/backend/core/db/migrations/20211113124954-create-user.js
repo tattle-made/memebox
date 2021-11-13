@@ -22,9 +22,6 @@ module.exports = {
         type: Sequelize.ENUM("hi", "en", "ta"),
         defaultValue: "en",
       },
-      badge: {
-        type: Sequelize.UUID,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,

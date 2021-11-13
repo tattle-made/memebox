@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
       },
       type: DataTypes.ENUM("text", "date", "radio", "range"),
+      key: DataTypes.STRING,
       label: DataTypes.STRING,
       order: DataTypes.INTEGER,
       annotationForm: {
