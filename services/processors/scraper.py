@@ -19,29 +19,21 @@ def download_post(post_url,id):
     post.scrape(headers=headers)
 
     if post['is_video']:
-        try:
-            post.download(id + '.mp4')
-        except Exception as esc:
-            print(f"Exception : {esc}")
+        post.download(id + '.mp4')
+        
     else:
-        try:
-            post.download(id + '.jpg')
-        except Exception as esc:
-            print(f"Exception : {esc}")
-
+        post.download(id + '.jpg')
+        
 def download_reels(reels_url,id):
 
     """
     utility function to download posts from the given reel url
     """
-
+    
     reel = Reel(reels_url)
     reel.scrape(headers=headers)
-    try:
-        reel.download(id + '.mp4')
-    except Exception as esc:
-        print(f"Exception : {esc}")
-        
+    reel.download(id + '.mp4')
+    
 def download(url):
 
     site = url.split('/')[2].split('.')[1]
@@ -50,20 +42,23 @@ def download(url):
 
     # check if the url is valid instagram url
     if site != 'instagram':
-
         raise 'Error : Not valid instagram url'
 
     # Post url
     if type == 'p':
-        download_post(url,id)
+        try:
+            download_post(url,id)
+        except:
+            raise 'Could not parse the post url'
 
     # Reel url
     elif type == 'reel':
-        download_reels(url,id)
-
+        try:
+            download_reels(url,id)
+        except:
+            raise 'Could not parse the reels url'
 
 if __name__ == "__main__":
 
-    #url = 'https://www.instagram.com/p/CHmfQ9xlWI_/?utm_medium=copy_link'
     url = 'https://www.instagram.com/reel/CVKobtmgTST/?utm_medium=copy_link'
     download(url)
