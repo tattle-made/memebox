@@ -1,45 +1,49 @@
-import { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import { useState } from "react";
+import { Grommet, Box, Text } from "grommet";
+import SuperTokens, {
+  getSuperTokensRoutesForReactRouterDom,
+} from "supertokens-auth-react";
+import ThirdPartyEmailPassword, {
+  Github,
+} from "supertokens-auth-react/recipe/thirdpartyemailpassword";
+import Session from "supertokens-auth-react/recipe/session";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import ReactRouterDome from "react-router-dom";
+import axios from "axios";
+Session.addAxiosInterceptors(axios);
+
+SuperTokens.init({
+  appInfo: {
+    // learn more about this on https://supertokens.io/docs/thirdpartyemailpassword/appinfo
+    appName: "memebox",
+    apiDomain: "http://localhost:3001",
+    websiteDomain: "http://localhost:3000",
+  },
+  recipeList: [
+    ThirdPartyEmailPassword.init({
+      signInAndUpFeature: {
+        providers: [Github.init()],
+      },
+    }),
+    Session.init(),
+  ],
+});
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Hello Vite + React!</p>
-        <p>
-          <button type="button" onClick={() => setCount((count) => count + 1)}>
-            count is: {count}
-          </button>
-        </p>
-        <p>
-          Edit <code>App.jsx</code> and save to test HMR updates.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          {' | '}
-          <a
-            className="App-link"
-            href="https://vitejs.dev/guide/features.html"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Vite Docs
-          </a>
-        </p>
-      </header>
-    </div>
-  )
+    <Grommet>
+      <Box>
+        <Text>hi</Text>
+        <Router>
+          <Switch>
+            {getSuperTokensRoutesForReactRouterDom(ReactRouterDome)}
+          </Switch>
+        </Router>
+      </Box>
+    </Grommet>
+  );
 }
 
-export default App
+export default App;

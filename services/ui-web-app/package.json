@@ -7,8 +7,14 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "axios": "^0.24.0",
+    "grommet": "^2.18.0",
+    "grommet-icons": "^4.6.2",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.3.3",
+    "supertokens-auth-react": "^0.17.2"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^1.0.0",
