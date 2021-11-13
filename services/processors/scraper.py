@@ -19,9 +19,15 @@ def download_post(post_url,id):
     post.scrape(headers=headers)
 
     if post['is_video']:
-        post.download(id + '.mp4')
+        try:
+            post.download(id + '.mp4')
+        except Exception as esc:
+            print(f"Exception : {esc}")
     else:
-        post.download(id + '.jpg')
+        try:
+            post.download(id + '.jpg')
+        except Exception as esc:
+            print(f"Exception : {esc}")
 
 def download_reels(reels_url,id):
 
@@ -31,8 +37,11 @@ def download_reels(reels_url,id):
 
     reel = Reel(reels_url)
     reel.scrape(headers=headers)
-    reel.download(id + '.mp4')
-
+    try:
+        reel.download(id + '.mp4')
+    except Exception as esc:
+        print(f"Exception : {esc}")
+        
 def download(url):
 
     site = url.split('/')[2].split('.')[1]
@@ -55,5 +64,6 @@ def download(url):
 
 if __name__ == "__main__":
 
-    url = 'https://www.instagram.com/p/CHmfQ9xlWI_/?utm_medium=copy_link'
+    #url = 'https://www.instagram.com/p/CHmfQ9xlWI_/?utm_medium=copy_link'
+    url = 'https://www.instagram.com/reel/CVKobtmgTST/?utm_medium=copy_link'
     download(url)
