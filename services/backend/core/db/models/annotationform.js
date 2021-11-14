@@ -13,6 +13,19 @@ module.exports = (sequelize, DataTypes) => {
       annotationForm.belongsTo(models.collection);
       annotationForm.hasMany(models.annotationFormField);
     }
+
+    static async getAnnotationForm(collectionId) {
+      const res = await annotationForm.findOne({
+        where: {
+          collectionId,
+        },
+        include: [sequelize.models.annotationFormField],
+        order: [
+          [{ model: sequelize.models.annotationFormField }, "order", "ASC"],
+        ],
+      });
+      return res.get({ plain: true });
+    }
   }
   annotationForm.init(
     {

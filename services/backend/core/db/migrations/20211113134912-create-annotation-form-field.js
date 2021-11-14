@@ -19,7 +19,7 @@ module.exports = {
       order: {
         type: Sequelize.INTEGER,
       },
-      annotationForm: {
+      annotationFormId: {
         type: Sequelize.UUID,
       },
       createdAt: {

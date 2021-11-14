@@ -26,7 +26,7 @@ GET http://localhost:3000/memes/collection/0dddd2c6-4bc2-4b40-845b-f5027395c130
 ###
 
 # GET http://localhost:3000/annotation-form/collection/:collectionId
-GET http://localhost:3000/annotation-form/collection/0f17e834-94e2-4886-ad93-6a445a0f2110
+GET http://localhost:3000/annotation-form/collection/30bf4e8d-6e66-48fb-8327-805b413d1ef6
 ###
 
 # GET http://localhost:3000/annotations/collection/:collectionId/meme/:memeId
@@ -34,18 +34,19 @@ GET http://localhost:3000/annotations/collection/0f17e834-94e2-4886-ad93-6a445a0
 
 ###
 
-# CREATE MEME
+# CREATE A NEW ANNOTATION
 # POST http://localhost:3000/annotations
 # { url : ""}
-POST http://localhost:3000/annotations
+POST http://localhost:3000/annotations/collection/asdf/meme/asdfasdf
 content-type : application/json
 
 {
-    "author" : "9d2f0725-0aaf-452f-914b-217593f1fb08",
-    "meme": "0a2aba5f-8e29-4c0c-a42c-fd850a26bf37",
-    "collection" : "0f17e834-94e2-4886-ad93-6a445a0f2110",
-    "key" : "hateful",
-    "value" : "1",
-    "type" : "boolean"
+    "annotations" : [
+        {
+            "key" : "hateful",
+            "value" : "1",
+            "type" : "boolean"
+        }
+    ]
 } 
 ###

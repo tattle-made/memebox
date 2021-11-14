@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       key: DataTypes.STRING,
       label: DataTypes.STRING,
       order: DataTypes.INTEGER,
-      annotationForm: {
+      annotationFormId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
