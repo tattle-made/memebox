@@ -6,7 +6,7 @@ This folder contains scripts which adds the scraping and searching functionality
 
     ├── Scraper.py                        # contains utility function to scrape Twitter and Instagram
     ├── instagram_scraper.py              # contains helper function to scrape Instagram        
-    ├── mappings.py                       # contains the mappings for the post indexed on Elastic Search 
+    ├── mappings.py                       # contains the mappings for the posts indexed on Elastic Search 
     |── s3_helper.py                      # contains functions to initialize,upload and get s3-url of aws s3 hosted files
     |── search.py                         # contains methods for Elastic Search functionality such as index,search
     ├── server.p                          # Flask app to create API endpoints
