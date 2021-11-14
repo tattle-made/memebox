@@ -1,5 +1,7 @@
 const { meme, collection } = require("../../core/db/models");
 const { StatusCodes } = require("http-status-codes");
+const axios = require("axios");
+const config = require("../../config");
 
 class Handler {
   async createMeme(req, res) {
@@ -29,6 +31,14 @@ class Handler {
     try {
       const { url, title } = req.body;
       console.log({ url, title });
+      const scrapedMeme = await axios.get(
+        `${config.processor_api_url}/scrape?url=${url}`
+      );
+
+      console.log(scrapedMeme.data);
+
+      res.send({ scraped_post: scrapedMeme.data });
+      // http://localhost:5000/scrape?url=https://www.instagram.com/reel/CVKobtmgTST/
     } catch (err) {
       console.log(err);
       res

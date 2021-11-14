@@ -1,2 +1,7 @@
 insta-scrape
 python-dotenv
+insta-scrape
+python-dotenv
+tweepy
+boto3
+botocore
