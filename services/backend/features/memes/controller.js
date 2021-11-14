@@ -13,6 +13,11 @@ class Controller {
         handler: this.handler.createMeme,
       },
       {
+        path: "/memes/bookmark",
+        method: "post",
+        handler: this.handler.createMemeFromBookmark,
+      },
+      {
         path: "/memes",
         method: "get",
         handler: this.handler.get,

@@ -13,6 +13,15 @@ content-type : application/json
     "title": "A spoof of Raja Babu"
 } 
 ###
+#Create MEME BY SENDING URL and TITLE
+POST http://localhost:3000/memes/bookmark
+content-type : application/json
+
+{
+    "url": "https://www.instagram.com/reel/CV-DtiZAuhs/",
+    "title": "asdf asdf asdf asdf asdf"
+} 
+###
 
 # GET http://localhost:3000/memes?page=0
 GET http://localhost:3000/memes?page=3

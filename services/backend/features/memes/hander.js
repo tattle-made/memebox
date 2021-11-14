@@ -25,6 +25,18 @@ class Handler {
     }
   }
 
+  async createMemeFromBookmark(req, res) {
+    try {
+      const { url, title } = req.body;
+      console.log({ url, title });
+    } catch (err) {
+      console.log(err);
+      res
+        .status(StatusCodes.INTERNAL_SERVER_ERROR)
+        .send({ error: "Could not create meme" });
+    }
+  }
+
   async get(req, res) {
     try {
       const { page } = req.query;
