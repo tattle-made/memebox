@@ -1,5 +1,7 @@
 "use strict";
-const { Model } = require("sequelize");
+const { Model, Op } = require("sequelize");
+const { v4: uuidv4 } = require("uuid");
+
 module.exports = (sequelize, DataTypes) => {
   class annotation extends Model {
     /**
@@ -12,6 +14,54 @@ module.exports = (sequelize, DataTypes) => {
       annotation.belongsTo(models.meme);
       annotation.belongsTo(models.collection);
       annotation.belongsTo(models.user);
+    }
+
+    static async getAnnotations(collectionId, memeId) {
+      const annotations = await annotation.findAll({
+        where: { [Op.and]: [{ collectionId }, { memeId }] },
+      });
+      const plainAnnotations = annotations.map((annotation) =>
+        annotation.get({ plain: true })
+      );
+      return annotations;
+    }
+
+    static async saveAnnotations(userId, collectionId, memeId, annotations) {
+      await Promise.all(
+        annotations.map((annotationItem) => {
+          return annotation
+            .findOne({
+              where: {
+                [Op.and]: [
+                  { userId },
+                  { collectionId },
+                  { memeId },
+                  { key: annotationItem.key },
+                ],
+              },
+            })
+            .then((obj) => {
+              // console.log(obj);
+              if (obj) {
+                return obj.update({
+                  key: annotationItem.key,
+                  value: annotationItem.value,
+                });
+              } else {
+                return annotation.create({
+                  id: uuidv4(),
+                  userId,
+                  memeId,
+                  collectionId,
+                  key: annotationItem.key,
+                  value: annotationItem.value,
+                  type: annotationItem.type,
+                });
+              }
+            });
+        })
+      );
+      return { message: "done" };
     }
   }
   annotation.init(

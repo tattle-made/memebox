@@ -33,7 +33,7 @@ const verifyRefreshToken = async (token) => {
 
 const authenticationMiddleware = async (req, res, next) => {
   // extract token from request headers
-  req.user = "69ae8f09-267e-464f-b8a7-fc3e4bdff28c";
+  req.user = "72eca58c-efb7-445b-a5d2-b36889b7f08e";
   next();
   //   if (
   //     req.originalUrl.startsWith("/auth/") ||

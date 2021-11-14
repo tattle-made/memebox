@@ -15,7 +15,7 @@ class Controller {
       {
         path: "/annotations/collection/:collectionId/meme/:memeId",
         method: "post",
-        handler: this.handler.createAnnotation,
+        handler: this.handler.saveAnnotations,
       },
     ];
   }
