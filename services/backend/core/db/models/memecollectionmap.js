@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      meme: {
+      memeId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
@@ -26,7 +26,7 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
-      collection: {
+      collectionId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {

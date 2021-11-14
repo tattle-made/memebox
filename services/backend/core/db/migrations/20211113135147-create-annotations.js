@@ -7,10 +7,13 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      meme: {
+      userId: {
         type: Sequelize.UUID,
       },
-      collection: {
+      memeId: {
+        type: Sequelize.UUID,
+      },
+      collectionId: {
         type: Sequelize.UUID,
       },
       key: {
@@ -19,7 +22,7 @@ module.exports = {
       value: {
         type: Sequelize.STRING,
       },
-      author: {
+      content: {
         type: Sequelize.UUID,
       },
       type: {

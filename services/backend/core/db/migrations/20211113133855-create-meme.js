@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      author: {
+      userId: {
         type: Sequelize.UUID,
       },
       url: {

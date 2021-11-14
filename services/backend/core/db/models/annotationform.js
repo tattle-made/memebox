@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       name: DataTypes.STRING,
       description: DataTypes.STRING,
-      collection: {
+      collectionId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
-      author: {
+      userId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {

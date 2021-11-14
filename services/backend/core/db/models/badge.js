@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      owner: {
+      userIde: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {

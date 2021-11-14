@@ -66,7 +66,7 @@ module.exports = {
     await queryInterface.bulkInsert("memes", [
       {
         id: uuidv4(),
-        author: userIDs[2].id,
+        userId: userIDs[2].id,
         url: `http://instagram.com/p/${uuidv4()}`,
         platform: "instagram",
         content_type: "post",
@@ -78,7 +78,7 @@ module.exports = {
       },
       {
         id: uuidv4(),
-        author: userIDs[2].id,
+        userId: userIDs[2].id,
         url: `http://instagram.com/p/${uuidv4()}`,
         platform: "instagram",
         content_type: "post",
@@ -90,7 +90,7 @@ module.exports = {
       },
       {
         id: uuidv4(),
-        author: userIDs[2].id,
+        userId: userIDs[2].id,
         url: `http://instagram.com/p/${uuidv4()}`,
         platform: "instagram",
         content_type: "image",
@@ -102,7 +102,7 @@ module.exports = {
       },
       {
         id: uuidv4(),
-        author: userIDs[2].id,
+        userId: userIDs[2].id,
         url: `http://instagram.com/p/${uuidv4()}`,
         platform: "instagram",
         content_type: "image",
@@ -114,7 +114,7 @@ module.exports = {
       },
       {
         id: uuidv4(),
-        author: userIDs[3].id,
+        userId: userIDs[3].id,
         url: `http://instagram.com/p/${uuidv4()}`,
         platform: "instagram",
         content_type: "image",
@@ -126,7 +126,7 @@ module.exports = {
       },
       {
         id: uuidv4(),
-        author: userIDs[3].id,
+        userId: userIDs[3].id,
         url: `http://instagram.com/p/${uuidv4()}`,
         platform: "instagram",
         content_type: "image",
@@ -138,7 +138,7 @@ module.exports = {
       },
       {
         id: uuidv4(),
-        author: userIDs[3].id,
+        userId: userIDs[3].id,
         url: `http://instagram.com/p/${uuidv4()}`,
         platform: "instagram",
         content_type: "image",
@@ -150,7 +150,7 @@ module.exports = {
       },
       {
         id: uuidv4(),
-        author: userIDs[4].id,
+        userId: userIDs[4].id,
         url: `http://instagram.com/p/${uuidv4()}`,
         platform: "instagram",
         content_type: "image",
@@ -162,7 +162,7 @@ module.exports = {
       },
       {
         id: uuidv4(),
-        author: userIDs[4].id,
+        userId: userIDs[4].id,
         url: `http://instagram.com/p/${uuidv4()}`,
         platform: "instagram",
         content_type: "image",
@@ -174,7 +174,7 @@ module.exports = {
       },
       {
         id: uuidv4(),
-        author: userIDs[4].id,
+        userId: userIDs[4].id,
         url: `http://instagram.com/p/${uuidv4()}`,
         platform: "instagram",
         content_type: "image",
@@ -194,7 +194,7 @@ module.exports = {
     await queryInterface.bulkInsert("collections", [
       {
         id: uuidv4(),
-        author: userIDs[1].id,
+        userId: userIDs[1].id,
         name: lorem.generateWords(1),
         description: lorem.generateWords(10),
         createdAt: new Date(),
@@ -202,7 +202,7 @@ module.exports = {
       },
       {
         id: uuidv4(),
-        author: userIDs[1].id,
+        userId: userIDs[1].id,
         name: lorem.generateWords(1),
         description: lorem.generateWords(10),
         createdAt: new Date(),
@@ -218,37 +218,37 @@ module.exports = {
     await queryInterface.bulkInsert("memeCollectionMaps", [
       {
         id: uuidv4(),
-        meme: memeIDs[0].id,
-        collection: collectionIDs[0].id,
+        memeId: memeIDs[0].id,
+        collectionId: collectionIDs[0].id,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: uuidv4(),
-        meme: memeIDs[1].id,
-        collection: collectionIDs[0].id,
+        memeId: memeIDs[1].id,
+        collectionId: collectionIDs[0].id,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: uuidv4(),
-        meme: memeIDs[2].id,
-        collection: collectionIDs[0].id,
+        memeId: memeIDs[2].id,
+        collectionId: collectionIDs[0].id,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: uuidv4(),
-        meme: memeIDs[3].id,
-        collection: collectionIDs[1].id,
+        memeId: memeIDs[3].id,
+        collectionId: collectionIDs[1].id,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
 
       {
         id: uuidv4(),
-        meme: memeIDs[4].id,
-        collection: collectionIDs[1].id,
+        memeId: memeIDs[4].id,
+        collectionId: collectionIDs[1].id,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -257,19 +257,19 @@ module.exports = {
     await queryInterface.bulkInsert("annotationForms", [
       {
         id: uuidv4(),
-        author: userIDs[1].id,
+        userId: userIDs[1].id,
         name: lorem.generateWords(2),
         description: lorem.generateWords(10),
-        collection: collectionIDs[0].id,
+        collectionId: collectionIDs[0].id,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
         id: uuidv4(),
-        author: userIDs[1].id,
+        userId: userIDs[1].id,
         name: lorem.generateWords(3),
         description: lorem.generateWords(10),
-        collection: collectionIDs[0].id,
+        collectionId: collectionIDs[0].id,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -342,11 +342,12 @@ module.exports = {
     await queryInterface.bulkInsert("annotations", [
       {
         id: uuidv4(),
-        meme: memeIDs[0].id,
-        collection: collectionIDs[0].id,
+        memeId: memeIDs[0].id,
+        collectionId: collectionIDs[0].id,
         key: "cringe",
         value: "1",
-        author: userIDs[3].id,
+        type: "radio",
+        userId: userIDs[3].id,
         createdAt: new Date(),
         updatedAt: new Date(),
       },

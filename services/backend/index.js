@@ -1,8 +1,9 @@
 const { Server } = require("./core/server");
-const { health } = require("./features/health");
+const { health, meme } = require("./features");
 
 server = new Server(3000);
+server.configureMiddlewares();
 
-server.setFeatures([health]);
+server.setFeatures([health, meme]);
 
 server.start();

@@ -1,5 +1,7 @@
 "use strict";
 const { Model } = require("sequelize");
+const { v4: uuidv4 } = require("uuid");
+const { pageSize } = require("../../../config");
 module.exports = (sequelize, DataTypes) => {
   class meme extends Model {
     /**
@@ -12,8 +14,51 @@ module.exports = (sequelize, DataTypes) => {
       meme.belongsTo(models.user);
       meme.belongsToMany(models.collection, {
         through: models.memeCollectionMap,
-        foreignKey: "meme",
+        foreignKey: "memeId",
       });
+    }
+
+    static async createByURL(
+      url,
+      author,
+      title,
+      platform,
+      contentType,
+      preview,
+      storeUrl
+    ) {
+      const newMeme = await meme.create({
+        id,
+        url,
+        author,
+        title,
+        platform,
+        content_type: contentType,
+        preview,
+        store_url: storeUrl,
+      });
+      return newMeme.get({ plain: true });
+    }
+
+    static async get(pageNum) {
+      const { rows, count } = await meme.findAndCountAll({
+        limit: 20,
+        offset: pageNum * pageSize,
+      });
+      const plainRows = rows.map((row) => row.get({ plain: true }));
+      return { memes: plainRows, count };
+    }
+
+    static async getMemesByUserId(userId, pageNum) {
+      const { rows, count } = await meme.findAndCountAll({
+        where: {
+          userId,
+        },
+        limit: 20,
+        offset: pageNum * pageSize,
+      });
+      const plainRows = rows.map((row) => row.get({ plain: true }));
+      return { memes: plainRows, count };
     }
   }
   meme.init(
@@ -24,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
       },
       url: DataTypes.STRING,
-      author: {
+      userId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {

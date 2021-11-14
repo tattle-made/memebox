@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const { authenticationMiddleware } = require("./middleware-authentication");
 
 class Server {
   constructor(port) {
@@ -8,7 +9,7 @@ class Server {
   }
 
   configureMiddlewares() {
-    this.expressApp.use(
+    this.express.use(
       cors({
         origin: "*",
       })
@@ -25,6 +26,7 @@ class Server {
 
     this.express.use(express.urlencoded({ extended: true }));
     this.express.use(express.json());
+    this.express.use(authenticationMiddleware);
   }
 
   start() {
@@ -45,7 +47,7 @@ class Server {
             this.express.get(conf.path, conf.handler);
             break;
           case "post":
-            this.express.get(conf.path, conf.handler);
+            this.express.post(conf.path, conf.handler);
           default:
         }
       });

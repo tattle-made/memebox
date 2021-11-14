@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      author: {
+      userId: {
         type: Sequelize.UUID,
       },
       name: {
@@ -16,7 +16,7 @@ module.exports = {
       description: {
         type: Sequelize.STRING,
       },
-      collection: {
+      collectionId: {
         type: Sequelize.UUID,
       },
       createdAt: {

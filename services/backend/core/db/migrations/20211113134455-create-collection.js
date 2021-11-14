@@ -10,7 +10,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      author: {
+      userId: {
         type: Sequelize.UUID,
       },
       description: {

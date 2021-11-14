@@ -7,7 +7,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      owner: {
+      userId: {
         type: Sequelize.UUID,
       },
       name: {

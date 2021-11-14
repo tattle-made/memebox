@@ -7,10 +7,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID,
       },
-      meme: {
+      memeId: {
         type: Sequelize.UUID,
       },
-      collection: {
+      collectionId: {
         type: Sequelize.UUID,
       },
       createdAt: {

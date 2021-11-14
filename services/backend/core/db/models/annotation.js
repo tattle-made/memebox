@@ -14,14 +14,14 @@ module.exports = (sequelize, DataTypes) => {
       annotation.belongsTo(models.user);
     }
   }
-  annotations.init(
+  annotation.init(
     {
       id: {
         primaryKey: true,
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      meme: {
+      memeId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
           key: "id",
         },
       },
-      collection: {
+      collectionId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       key: DataTypes.STRING,
       value: DataTypes.STRING,
-      author: {
+      userId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
@@ -51,8 +51,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "annotations",
+      modelName: "annotation",
     }
   );
-  return annotations;
+  return annotation;
 };

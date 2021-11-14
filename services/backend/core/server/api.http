@@ -1,0 +1,51 @@
+# CREATE MEME
+# POST http://localhost:3000/memes
+# { url : ""}
+POST http://localhost:3000/memes
+content-type : application/json
+
+{
+    "url": "https://www.instagram.com/reel/CV-DtiZAuhs/",
+    "platform": "instagram",
+    "contentType": "post",
+    "preview": "https://picsum.photos/id/202/200/300",
+    "storeURL": "https://picsum.photos/id/203/200/300",
+    "title": "A spoof of Raja Babu"
+} 
+###
+
+# GET http://localhost:3000/memes?page=0
+GET http://localhost:3000/memes?page=3
+###
+# GET http://localhost:3000/memes/user/:userId?page=0
+GET http://localhost:3000/memes/user/0e178286-41e7-4c60-bb9f-759ee3de5f1c
+
+###
+# GET http://localhost:3000/memes/collection/:collectionId?page=0
+GET http://localhost:3000/memes/collection/0dddd2c6-4bc2-4b40-845b-f5027395c130
+###
+
+# GET http://localhost:3000/annotation-form/collection/:collectionId
+GET http://localhost:3000/annotation-form/collection/0f17e834-94e2-4886-ad93-6a445a0f2110
+###
+
+# GET http://localhost:3000/annotations/collection/:collectionId/meme/:memeId
+GET http://localhost:3000/annotations/collection/0f17e834-94e2-4886-ad93-6a445a0f2110/meme/0a2aba5f-8e29-4c0c-a42c-fd850a26bf37
+
+###
+
+# CREATE MEME
+# POST http://localhost:3000/annotations
+# { url : ""}
+POST http://localhost:3000/annotations
+content-type : application/json
+
+{
+    "author" : "9d2f0725-0aaf-452f-914b-217593f1fb08",
+    "meme": "0a2aba5f-8e29-4c0c-a42c-fd850a26bf37",
+    "collection" : "0f17e834-94e2-4886-ad93-6a445a0f2110",
+    "key" : "hateful",
+    "value" : "1",
+    "type" : "boolean"
+} 
+###

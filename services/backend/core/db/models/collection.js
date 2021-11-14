@@ -12,9 +12,32 @@ module.exports = (sequelize, DataTypes) => {
       collection.belongsTo(models.user);
       collection.belongsToMany(models.meme, {
         through: models.memeCollectionMap,
-        foreignKey: "collection",
+        foreignKey: "collectionId",
       });
       collection.hasOne(models.annotationForm);
+    }
+
+    static async getMemesByCollectionId(collectionId, pageNum) {
+      const [resultCount, countMetadata] = await sequelize.query(`
+       SELECT COUNT(collectionId) as count FROM memeCollectionMaps WHERE collectionId="${collectionId}"
+      `);
+
+      const count = resultCount[0].count;
+
+      const [results, metadata] = await sequelize.query(
+        `SELECT memeId, collectionId from memeCollectionMaps WHERE collectionId="${collectionId}"`
+      );
+
+      const memes = await Promise.all(
+        results.map(async (result) => {
+          const [memeResults, memeMetadata] = await sequelize.query(
+            `SELECT * from memes WHERE id="${result.memeId}"`
+          );
+          return memeResults[0];
+        })
+      );
+
+      return { memes, count };
     }
   }
   collection.init(
@@ -25,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
         defaultValue: DataTypes.UUIDV4,
       },
       name: DataTypes.STRING,
-      author: {
+      userId: {
         type: DataTypes.UUID,
         allowNull: false,
         references: {
