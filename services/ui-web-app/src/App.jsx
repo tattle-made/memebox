@@ -32,11 +32,22 @@ SuperTokens.init({
 
 function App() {
   const [memesData, setMemesData] = useState([]);
-  const [filter, setFilter] = useState('all');
+  const [allFilters, setAllFilters] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
+
+  useEffect(() => setMemesData(memes), [memes]);
 
   useEffect(() => {
-    setMemesData(memes);
+    const memesType = memesData.map(elem => elem.type)
+    setAllFilters(['all', ...new Set(memesType)])
+    setFilteredData(memesData)
   }, [memesData])
+  
+  useEffect(() => {
+      selectedFilter === 'all' || selectedFilter === ''? setFilteredData(memesData):setFilteredData(memesData.filter(value => value.type === selectedFilter))
+
+  }, [selectedFilter])
 
   const theme = {
     themeMode: 'dark',
@@ -80,20 +91,15 @@ function App() {
         <Box fill align="start" justify="start">
           <Select
             placeholder="All"
-            value={filter}
-            options={memesData.map(value => value.type)}
-            onChange={(e) => {
-              let allTypes = memesData.map(value => value.type);
-              // let onlyTypes = allTypes.filter(val => allTypes.find(val))
-              console.log(allTypes);
-              setFilter(e.target.value)
-            }}
+            value={selectedFilter}
+            options={allFilters}
+            onChange={(e) => setSelectedFilter(e.target.value)}
             clear
             margin='medium'
           />
         </Box>
         <Grid gap="large" columns={{ count: 'fit', size: 'small' }}>
-          {memesData.map((value) => (
+          {filteredData.map((value) => (
             <Card
               key={value.id}
               // onClick={() => {
