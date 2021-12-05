@@ -79,6 +79,7 @@ function App() {
     const { startIndex, endIndex } = event;
     const nextData = memesData.slice(startIndex, endIndex);
     setCurrentData(nextData);
+    setSelectedFilter('');
   };
 
   return (
