@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Grommet, Box, Grid, Card, CardHeader, CardBody, Image, Video, Select, Text } from "grommet";
+import { Grommet, Box, Grid, Card, CardHeader, CardBody, Image, Video, Select, Text, Pagination } from "grommet";
 import SuperTokens, {
   getSuperTokensRoutesForReactRouterDom,
 } from "supertokens-auth-react";
@@ -34,20 +34,20 @@ function App() {
   const [memesData, setMemesData] = useState([]);
   const [allFilters, setAllFilters] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
+  const [currentData, setCurrentData] = useState([]);
+  const [filterCurrentData, setFilterCurrentData] = useState([]);
 
   useEffect(() => setMemesData(memes), [memes]);
 
   useEffect(() => {
     const memesType = memesData.map(elem => elem.type)
     setAllFilters(['all', ...new Set(memesType)])
-    setFilteredData(memesData)
+    setCurrentData(memesData.slice(0, 4));
   }, [memesData])
   
   useEffect(() => {
-      selectedFilter === 'all' || selectedFilter === ''? setFilteredData(memesData):setFilteredData(memesData.filter(value => value.type === selectedFilter))
-
-  }, [selectedFilter])
+    selectedFilter === 'all' || selectedFilter === '' ? setFilterCurrentData(currentData) : setFilterCurrentData(currentData.filter(value => value.type === selectedFilter))
+  }, [selectedFilter, currentData])
 
   const theme = {
     themeMode: 'dark',
@@ -75,6 +75,12 @@ function App() {
     },
   };
 
+  const handleChange = (event) => {
+    const { startIndex, endIndex } = event;
+    const nextData = memesData.slice(startIndex, endIndex);
+    setCurrentData(nextData);
+  };
+
   return (
     // <Grommet>
     //   <Box>
@@ -88,7 +94,7 @@ function App() {
     // </Grommet>
     <Grommet theme={theme} full>
       <Box pad='medium'>
-        <Box fill align="start" justify="start">
+        <Box fill direction='row' alignContent="center" justify="start">
           <Select
             placeholder="All"
             value={selectedFilter}
@@ -97,9 +103,16 @@ function App() {
             clear
             margin='medium'
           />
+          <Pagination
+            alignSelf='center'
+            numberEdgePages={5}
+            numberItems={memesData.length}
+            onChange={handleChange}
+            step={4}
+          />
         </Box>
         <Grid gap="large" columns={{ count: 'fit', size: 'small' }}>
-          {filteredData.map((value) => (
+          {filterCurrentData.map((value) => (
             <Card
               key={value.id}
               // onClick={() => {
