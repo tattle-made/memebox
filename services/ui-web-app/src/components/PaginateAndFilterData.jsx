@@ -1,7 +1,6 @@
 import { Box, Pagination, Select } from 'grommet';
 import { useContext, useState, useEffect } from 'react';
 import { DataContext } from '../App';
-import memes from '../data-structure';
 
 
 function PaginateAndFilter() {

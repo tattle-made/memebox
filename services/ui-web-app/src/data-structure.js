@@ -160,7 +160,7 @@ const memes = [
 		id: '13',
     	data : {
 			url: './src/asset/meme1.jpeg',
-			title: 'title 1',
+			title: 'title 13',
 			date: (new Date()).toISOString(),
     	},
     	metadata : {
@@ -173,7 +173,7 @@ const memes = [
 		id: '14',
     	data : {
 			url: './src/asset/meme5.gif',
-			title: 'title 2',
+			title: 'title 14',
 			date: (new Date()).toISOString(),
     	},
     	metadata : {
@@ -211,8 +211,8 @@ const memes = [
     	type :'GIF',
 		id: '17',
     	data : {
-			url: './src/asset/meme1.gif',
-			title: 'title 5',
+			url: './src/asset/meme5.gif',
+			title: 'title 17',
 			date: (new Date()).toISOString(),
     	},
     	metadata : {
@@ -238,7 +238,7 @@ const memes = [
 		id: '19',
     	data : {
 			url: './src/asset/meme1.jpeg',
-			title: 'title 7',
+			title: 'title 19',
 			date: (new Date()).toISOString(),
     	},
     	metadata : {
@@ -251,7 +251,7 @@ const memes = [
 		id: '20',
     	data : {
 			url: './src/asset/meme5.gif',
-			title: 'title 8',
+			title: 'title 20',
 			date: (new Date()).toISOString(),
     	},
     	metadata : {
