@@ -14,7 +14,7 @@ function PaginateAndFilter() {
     useEffect(() => {
     const memesType = memesData.map(elem => elem.type)
     setAllFilters(['all', ...new Set(memesType)])
-    setCurrentData(memesData.slice(0, 4));
+    setCurrentData(memesData.slice(0, 8));
   }, [memesData])
   
   useEffect(() => {
@@ -44,7 +44,7 @@ function PaginateAndFilter() {
         numberEdgePages={5}
         numberItems={memesData.length}
         onChange={handleChange}
-        step={4}
+        step={8}
       />
     </Box>
   );

@@ -6,6 +6,8 @@ import MemeHeader from "./MemeHeader";
 
 const Meme = ({ value }) => {
 
+	// console.log(value.data);
+
 	return (
 		<Card
 			key={value.id}
@@ -19,8 +21,8 @@ const Meme = ({ value }) => {
 			<MemeHeader title={value.data.title} />
 			
 			<MemeBody
-				type={value.type} s
-				rc={value.data.url}
+				type={value.type}
+				src={value.data.url}
 			/>
 		</Card>
 	)	
