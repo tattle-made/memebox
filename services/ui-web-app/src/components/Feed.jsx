@@ -1,4 +1,3 @@
-//call meme.js here
 import { Box, Grid } from "grommet";
 import { useContext } from "react";
 import { DataContext } from "../App";

@@ -1,4 +1,3 @@
-//call memeHeading and memeImage here
 //hyperlink every card its url, when the url is clicked, open the meme on full page.
 //use react-router to achieve the above goal
 import { Card } from "grommet";

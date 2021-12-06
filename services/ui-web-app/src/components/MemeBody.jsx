@@ -1,6 +1,5 @@
 import { CardBody, Image, Video,  } from "grommet";
 
-
 const MemeBody = ({type, src}) => {
 
 	const HandleMemeBody = (type) => {
