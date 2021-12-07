@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Grommet, Box, Grid, Card, CardHeader, CardBody, Image, Video, Select, Text } from "grommet";
+import { useEffect, useState, createContext } from "react";
+import { Grommet, Box, Grid, Card, CardHeader, CardBody, Image, Video, Select, Text, Pagination, Button } from "grommet";
 import SuperTokens, {
   getSuperTokensRoutesForReactRouterDom,
 } from "supertokens-auth-react";
@@ -11,7 +11,10 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 // import ReactRouterDom from "react-router-dom";
 import axios from "axios";
 Session.addAxiosInterceptors(axios);
-import  memes from './data-structure';
+import memes from './data-structure';
+import Feed from "./components/Feed";
+import FeedControls from "./components/FeedControls";
+import Post from "./components/Post";
 
 SuperTokens.init({
   appInfo: {
@@ -30,16 +33,19 @@ SuperTokens.init({
   ],
 });
 
+export const DataContext = createContext(null);
+
 function App() {
   const [memesData, setMemesData] = useState([]);
-  const [filter, setFilter] = useState('all');
+  const [filterCurrentData, setFilterCurrentData] = useState([]);
+  const [bg, setBg] = useState('');
+  const [isDark, setIsDark] = useState(false);
 
-  useEffect(() => {
-    setMemesData(memes);
-  }, [memesData])
-
+  useEffect(() => setMemesData(memes), [memes]);
+  useEffect(() => isDark ? setBg(bgOptions?.dark) : setBg(bgOptions?.light), [isDark])
+  
   const theme = {
-    themeMode: 'dark',
+    themeMode: 'light',
     global: {
       font: {
         family: `-apple-system,
@@ -48,80 +54,53 @@ function App() {
       },
     },
     card: {
-      hover: {
-        container: {
-          elevation: 'large',
-        },
-      },
       container: {
-        elevation: 'medium',
+        elevation: 'small',
+        color: '#020202',
         extend: `transition: all 0.2s ease-in-out;`,
       },
-      footer: {
-        pad: { horizontal: 'medium', vertical: 'small' },
-        background: '#00000008',
-      },
+      header: {
+        color: '#020202',
+      }
     },
   };
 
-  return (
-    // <Grommet>
-    //   <Box>
-    //     <Text>hi</Text>
-    //     <Router>
-    //       <Switch>
-    //         {getSuperTokensRoutesForReactRouterDom(ReactRouterDom)}
-    //       </Switch>
-    //     </Router>
-    //   </Box>
-    // </Grommet>
-    <Grommet theme={theme} full>
-      <Box pad='medium'>
-        <Box fill align="start" justify="start">
-          <Select
-            placeholder="All"
-            value={filter}
-            options={memesData.map(value => value.type)}
-            onChange={(e) => {
-              let allTypes = memesData.map(value => value.type);
-              // let onlyTypes = allTypes.filter(val => allTypes.find(val))
-              console.log(allTypes);
-              setFilter(e.target.value)
-            }}
-            clear
-            margin='medium'
+   const bgOptions = {
+		light: {
+			color: '#fff'
+		},
+		dark: {
+			color: '#000'
+		}
+	}
+
+  return ( 
+    <Grommet pad='large' theme={theme} background={bg} full>
+      <Router>
+        <DataContext.Provider
+          value={
+            {
+              memesData,
+              filterCurrentData,
+              setFilterCurrentData,
+              isDark,
+              setIsDark
+            }
+        }>
+          
+        <Switch>
+          <Route
+            path='/:postId'
+            children={<Post />}
           />
-        </Box>
-        <Grid gap="large" columns={{ count: 'fit', size: 'small' }}>
-          {memesData.map((value) => (
-            <Card
-              key={value.id}
-              // onClick={() => {
-                
-              //   open the card on fullscreen
-              // }}
-              height='medium'
-              width='medium'
-            >
-              <CardHeader background='light-1' pad='small'>
-                  <Text>{value.data.title}</Text>
-              </CardHeader>
-              <CardBody pad="small">
-                {value.type === 'image' || value.type === 'GIF' ?
-                  <Image
-                  fit="scale-down"
-                  src={ value.data.url }
-                  /> : (value.type === 'video' ? 
-                    <Video controls="over" fit="scale-down">
-                      <source key="video" src={ value.data.url } type="video/mp4" />
-                    </Video> : <Text>{value.data.text}</Text>
-                  )}
-              </CardBody>
-            </Card>
-          ))}
-        </Grid>
-     </Box>
-  </Grommet>
+            <Route path='/'>
+              <FeedControls />
+              <Feed />
+            </Route>
+          </Switch>
+        </DataContext.Provider>
+      </Router>
+    </Grommet>
   );
 }
 
