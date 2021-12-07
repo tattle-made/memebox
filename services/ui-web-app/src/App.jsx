@@ -1,5 +1,5 @@
 import { useEffect, useState, createContext } from "react";
-import { Grommet, Box, Grid, Card, CardHeader, CardBody, Image, Video, Select, Text, Pagination } from "grommet";
+import { Grommet, Box, Grid, Card, CardHeader, CardBody, Image, Video, Select, Text, Pagination, Button } from "grommet";
 import SuperTokens, {
   getSuperTokensRoutesForReactRouterDom,
 } from "supertokens-auth-react";
@@ -38,14 +38,12 @@ export const DataContext = createContext(null);
 function App() {
   const [memesData, setMemesData] = useState([]);
   const [filterCurrentData, setFilterCurrentData] = useState([]);
-  const [bg, setBg] = useState('')
+  const [bg, setBg] = useState('');
+  const [isDark, setIsDark] = useState(false);
 
-  useEffect(() => {
-    setMemesData(memes);
-  }, [memes]);
-
-
-
+  useEffect(() => setMemesData(memes), [memes]);
+  useEffect(() => isDark ? setBg(bgOptions?.dark) : setBg(bgOptions?.light), [isDark])
+  
   const theme = {
     themeMode: 'light',
     global: {
@@ -55,32 +53,38 @@ function App() {
             "Segoe UI"`,
       },
     },
-    // card: {
-    //   container: {
-    //     elevation: 'small',
-    //     extend: `transition: all 0.2s ease-in-out;`,
-    //   },
-    // },
+    card: {
+      container: {
+        elevation: 'small',
+        color: '#020202',
+        extend: `transition: all 0.2s ease-in-out;`,
+      },
+      header: {
+        color: '#020202',
+      }
+    },
   };
 
-  const bgOptions = {
-    light: {
-      color: '#fff'
-    },
-    dark: {
-      color: '#000'
-    }
-  }
+   const bgOptions = {
+		light: {
+			color: '#fff'
+		},
+		dark: {
+			color: '#000'
+		}
+	}
 
   return ( 
-    <Grommet pad='large' theme={theme} background={bgOptions.dark} full>
+    <Grommet pad='large' theme={theme} background={bg} full>
       <Router>
         <DataContext.Provider
           value={
             {
               memesData,
               filterCurrentData,
-              setFilterCurrentData
+              setFilterCurrentData,
+              isDark,
+              setIsDark
             }
         }>
           
