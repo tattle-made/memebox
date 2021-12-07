@@ -14,6 +14,7 @@ Session.addAxiosInterceptors(axios);
 import memes from './data-structure';
 import Feed from "./components/Feed";
 import FeedControls from "./components/FeedControls";
+import Post from "./components/Post";
 
 SuperTokens.init({
   appInfo: {
@@ -37,13 +38,16 @@ export const DataContext = createContext(null);
 function App() {
   const [memesData, setMemesData] = useState([]);
   const [filterCurrentData, setFilterCurrentData] = useState([]);
+  const [bg, setBg] = useState('')
 
-  useEffect(() => setMemesData(memes), [memes]);
+  useEffect(() => {
+    setMemesData(memes);
+  }, [memes]);
 
 
 
   const theme = {
-    themeMode: 'dark',
+    themeMode: 'light',
     global: {
       font: {
         family: `-apple-system,
@@ -51,48 +55,47 @@ function App() {
             "Segoe UI"`,
       },
     },
-    card: {
-      hover: {
-        container: {
-          elevation: 'large',
-        },
-      },
-      container: {
-        elevation: 'medium',
-        extend: `transition: all 0.2s ease-in-out;`,
-      },
-      footer: {
-        pad: { horizontal: 'medium', vertical: 'small' },
-        background: '#00000008',
-      },
-    },
+    // card: {
+    //   container: {
+    //     elevation: 'small',
+    //     extend: `transition: all 0.2s ease-in-out;`,
+    //   },
+    // },
   };
 
+  const bgOptions = {
+    light: {
+      color: '#fff'
+    },
+    dark: {
+      color: '#000'
+    }
+  }
 
-
-  return (
-    // <Grommet>
-    //   <Box>
-    //     <Text>hi</Text>
-    //     <Router>
-    //       <Switch>
-    //         {getSuperTokensRoutesForReactRouterDom(ReactRouterDom)}
-    //       </Switch>
-    //     </Router>
-    //   </Box>
-    // </Grommet>
-    <Grommet theme={theme} full>
-      <DataContext.Provider
-        value={
-          {
-            memesData,
-            filterCurrentData,
-            setFilterCurrentData
-          }
+  return ( 
+    <Grommet pad='large' theme={theme} background={bgOptions.dark} full>
+      <Router>
+        <DataContext.Provider
+          value={
+            {
+              memesData,
+              filterCurrentData,
+              setFilterCurrentData
+            }
         }>
-        <FeedControls />
-        <Feed />
-      </DataContext.Provider>
+          
+        <Switch>
+          <Route
+            path='/:postId'
+            children={<Post />}
+          />
+            <Route path='/'>
+              <FeedControls />
+              <Feed />
+            </Route>
+          </Switch>
+        </DataContext.Provider>
+      </Router>
     </Grommet>
   );
 }

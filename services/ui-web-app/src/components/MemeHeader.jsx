@@ -1,10 +1,13 @@
-import { CardHeader, Text } from "grommet";
+import { Heading } from "grommet"
 
-const MemeHeader = ({title}) => {
+
+const MemeHeader = (props) => {
+	const { title } = props
+
 	return (
-		<CardHeader background='light-1' pad='small'>
-			<Text>{title}</Text>
-		</CardHeader>
+		<Heading {...props}>
+			{title}
+		</Heading>
 	)
 }
 

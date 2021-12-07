@@ -29,7 +29,12 @@ function PaginateAndFilter() {
  
 
   return (
-    <Box direction='row' alignContent="center" justify="start">
+    <Box
+      direction='row'
+      alignContent="center"
+      justify="between"
+      pad='small'
+    >
       <Select
         placeholder="All"
         value={selectedFilter}
@@ -45,6 +50,7 @@ function PaginateAndFilter() {
         onChange={handleChange}
         step={8}
       />
+      
     </Box>
   );
 }

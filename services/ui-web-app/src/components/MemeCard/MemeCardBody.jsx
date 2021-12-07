@@ -1,5 +1,4 @@
-import { Box, Video, Image } from "grommet"
-
+import { CardBody, Image, Video,  } from "grommet";
 
 const MemeBody = ({type, src}) => {
 
@@ -9,7 +8,7 @@ const MemeBody = ({type, src}) => {
 		}
 		else {
 			return (
-				<Video fit="contain">
+				<Video fit="cover">
 					<source key="video" src={ src } type="video/mp4" />
 				</Video>
 			)
@@ -17,9 +16,9 @@ const MemeBody = ({type, src}) => {
 	}
 
 	return (
-		<Box pad="small">
+		<CardBody pad="small">
 			{HandleMemeBody(type)}
-		</Box>
+		</CardBody>
 	)
 }
 
